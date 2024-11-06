@@ -335,14 +335,14 @@ products.forEach((product) => {
     </div>
     <div class="flex space-x-4 mb-5 text-sm font-medium">
       <div class="flex-auto flex space-x-4">
-        <button class="buy-now h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="button">
+        <button class="buy-now h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" >
           Buy now
         </button>
-        <button class="h-10 px-6 font-semibold rounded-full border border-slate-200 text-slate-900 add_To_Cart">
+        <button class="h-10 px-6 font-semibold rounded-full border border-slate-200 text-slate-900 add-to-cart">
           Add to Cart
         </button>
       </div>
-      <button class="flex-none flex items-center justify-center w-9 h-9 rounded-full text-violet-600 bg-violet-50" type="button" aria-label="Like">
+      <button class="flex-none flex items-center justify-center w-9 h-9 rounded-full text-violet-600 bg-violet-50"  aria-label="Like">
         <svg width="20" height="20" fill="currentColor" aria-hidden="true">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
         </svg>
@@ -357,16 +357,20 @@ products.forEach((product) => {
 
     productPage.appendChild(singleProduct);
 
-    singleProduct.querySelector(".add_To_Cart").addEventListener("click", () => {
-        addToCart(id);
-        // alert("ola")
+    
+
+    singleProduct.querySelector(".add-to-cart").addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("ola")
+
+    })
+    
+    singleProduct.querySelector(".buy-now").addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("buy")
+        addToCart(id); 
 
     });
-
-    // singleProduct.querySelector(".buy_now").addEventListener("click", () => {
-    //     // navigateToCart(id);
-    //     alert("ola")
-    // });
 
 });
 
@@ -381,23 +385,22 @@ const addToCart = (id) => {
     
 }
 
-const updateCartUrl = () => {
-    const url = window.location.href;
-    const newURL = new URLSearchParams("id");
-    console.log(newURL);
 
+const navigateToProductPage = (id) => {
+    const url = `cart.html?id=${id}`;
+    window.location.href = url;
 }
 
-// const navigateToCart = (product) => {
-//     const url = window.location.href;
-//     console.log(url);
-// }
 
 
+
+
+// TODO: Cart button
 // const cart = document.getElementById("cart")
 
 // cart.addEventListener("click", () => {
 //     window.location.href = "cart.html"
+
 // })
 
 
