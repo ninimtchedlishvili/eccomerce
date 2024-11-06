@@ -355,52 +355,50 @@ products.forEach((product) => {
     </div>
     `;
 
-    productPage.appendChild(singleProduct);
-
-    
-
     singleProduct.querySelector(".add-to-cart").addEventListener("click", (event) => {
         event.preventDefault();
-        console.log("ola")
-
+        addToCart(id);
     })
     
     singleProduct.querySelector(".buy-now").addEventListener("click", (event) => {
         event.preventDefault();
-        console.log("buy")
-        addToCart(id); 
-
+        navigateToProductPage(); 
     });
 
+    productPage.appendChild(singleProduct);
 });
 
 const cartItems = [];
 
 
 const addToCart = (id) => {
-    console.log(id);
     const product = products.find((product) => product.id === id);
     cartItems.push(product);
+    updateCartUrl();
     console.log(cartItems);
-    
+}
+
+let url;
+const updateCartUrl = () => {
+    const cartItemsIds = cartItems.map((item) => item.id).join(",");
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set("cart", cartItemsIds);
+    console.log(currentUrl.search); //undefined
+    const newURL = currentUrl.search; 
+    url = `cart.html?id=${newURL}`;
+
 }
 
 
-const navigateToProductPage = (id) => {
-    const url = `cart.html?id=${id}`;
+const navigateToProductPage = () => {
     window.location.href = url;
 }
 
 
+const cart = document.getElementById("cart")
+
+cart.addEventListener("click", navigateToProductPage)
 
 
-
-// TODO: Cart button
-// const cart = document.getElementById("cart")
-
-// cart.addEventListener("click", () => {
-//     window.location.href = "cart.html"
-
-// })
 
 
